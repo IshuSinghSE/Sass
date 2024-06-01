@@ -11,7 +11,8 @@ for %%I in (%current%) do (
 @REM :: Creating files & dirs ::
 :create_folders 
 
-IF not EXIST %parent%\main.scss touch %parent%\main.scss
+@REM IF not EXIST %parent%\main.scss touch %parent%\main.scss
+IF not EXIST %parent%\main.scss powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/IshuSinghSE/Sass/master/sass/main.scss  -OutFile %parent%\main.scss"
 IF not EXIST %parent%\%~1 mkdir %parent%\%~1
 
 if %~1 == abstract (touch %parent%\%~1\_variables.scss & touch %parent%\%~1\_functions.scss & touch %parent%\%~1\_mixins.scss)
@@ -22,4 +23,6 @@ if %~1 == pages (touch %parent%\%~1\_home.scss & touch %parent%\%~1\_about.scss 
 if %~1 == themes (touch %parent%\%~1\_themes.scss & touch %parent%\%~1\_admin.scss)
 if %~1 == vendors (touch %parent%\%~1\_bootstrap.scss & touch %parent%\%~1\_jquery.scss)
 
+
 EXIT /B 0
+
